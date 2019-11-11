@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function ()
+        {
+            // alert("Hello,From Jquery");
+            $("#btn1").click(function () {
+                $("div").html("You have succesfullly clicked the button")//this will be applied for al the div tags
+            })
+        });
+
+        window.onload = function () {
+            //alert("Hello,from JavaScript");
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">Click Me</button>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <div style="background-color:red;height:100px;width:200px" id="rect"></div>
+    <button id="showbtn">show</button><button id="hidebtn">hide</button>
+    <button id="upbtn">slide up</button><button id="downbtn">slide down</button>
+    <button id="fadeInbtn">Fade In</button><button id="fadeoutbtn">fade out</button>
+    <button id="doAll">Run all Effects</button>
+    <script>
+        $("#showbtn").click(function () { $("#rect").show(5000); });
+        $("#hidebtn").click(function () { $("#rect").hide("slow"); });
+        $('#upBtn').click(function () { $('#rect').slideUp(2000); });
+        $('#upBtn').click(function () { $('#rect').slideDown(2000); });
+        $('#fadeInbtn').click(function () { $('#rect').fadeIn(2000); })
+        $('#fadeInbtn').click(function () { $('#rect').fadeOut(2000); })
+        //slideDown(),fadeIn(),fadeOut()
+
+        $('#doAll").click(function(){
+                                                $('#rect').show(2000).slideUp(2000).slideDown(2000).fadeIn(2000).fadeOut(2000).hide(2000).show(5000);});
+        //show,hide,toggle=>change visibilty or display:inline to display:none
+        //fadeIN,fadeOut,fadeToggle,fade=>change the opacity from opacity:0 to opacity:1
+        //slideup.slidedown,slidetoggle=>change the height property from 0 to n
+    </script>
+    <style>
+        /*All Descendants p tags of #domDiv*/
+        #domDiv p {
+            border: 1px dashed black;
+            padding: 5px;
+            margin: 2px;
+        }
+        /*Direct descendant "p" tags of #domDiv*/
+
+        #domDiv > p {
+            border: 1px solid blue;
+            padding: 5px;
+            margin: 2px;
+        }
+        /*+ = is next sibling "p" tags of #domDiv*/
+        #domDiv + p {
+            border: 1px solid red;
+            padding: 5px;
+        }
+
+        #domDiv > p:first-child {
+            border: 2px dotted green
+        }
+        /*pseudo classes*/
+    </style>
+    <hr />
+    <h3>DOM Manipilation</h3>
+    <div>
+        <div id="domDiv">
+            <p>A paragraph insude the 'domDiv' element</p>
+            <p>Another paragraph within the #domdiv,which is sibling of previous paragraph</p>
+            <div>
+                <p>Paragraph in a div which is nested within #domDiv element</p>
+            </div>
+
+        </div>
+        <p>This is a sibling paragraph element ,which is next element after #domDiv</p>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <button id="allDescendantBtn">All Descendants</button>
+    <button id="directDescendantBtn">Direct Descendants</button>
+    <button id="SiblingBtn">Sibling Elements</button>
+    <button id="filtersBtn">Filters</button>
+    <style>
+        .whiteblue {
+            color: white;
+            background-color: deepskyblue
+        }
+
+        .blackLemon {
+            color: black;
+            background-color: lemonchiffon
+        }
+
+        .whiteNavy {
+            color: white;
+            background-color: navy
+        }
+
+        .tealGolden {
+            color: teal;
+            background-color: palegoldenrod
+        }
+    </style>
+    <script>
+        $("#allDescendantBtn").click(function () {
+            //$('#domDiv p').css({ color: 'white', backgroundColor: "DeepSkyBlue" });
+            if ($("#domDiv p").hasClass("whiteblue"))
+                $("#domDiv p").removeClass("whiteblue");
+            else
+                $("#domDiv p").addClass("whiteblue");
+        });
+
+
+        $("#directDescendantBtn").click(function () {
+            //$('#domDiv > p').css({ color: 'Black', backgroundColor: "LemonChiffon" });
+            $("#domDiv >p").toggleClass("blackLemon");
+
+        });
+
+
+        $("#SiblingBtn").click(function () {
+            // $('#domDiv + p').css({ color: 'white', backgroundColor: "Navy" });
+            $("#domDiv +p").toggleClass("whiteNavy");
+        });
+        $("#filtersBtn").click(function () {
+            //$('#domDiv > p:first-child').css({ color: 'teal', backgroundColor: "palegoldenrod" });
+            $("#domDiv >p:first-child").toggleClass("tealGolden");
+        });
+    </script>
+
+    <!-- --------------------------------DOM Manipulation Functions------------------------------------------- -->
+    <br /><br /><br /><br /><br />
+    <button id="appendBtn">Append</button>
+    <button id="prependBtn">Prepend</button>
+    <button id="afterBtn">Insert After</button>
+    <button id="beforeBtn">Insert Before</button>
+    <button id="removeAll">Remove Elements</button>
+
+
+    <script>
+        var pTag = "<p class='sample'>Hi, I am added here.</p>";
+
+        $("#appendBtn").click(function () {//Add elements to given node 
+            $("#domDiv").append(pTag);
+            $(pTag).appendTo("#domDiv");
+        });
+
+
+        $("#prependBtn").click(function () {//Add elements to given node 
+            $("#domDiv").prepend(pTag);
+            $(pTag).prependTo("#domDiv");
+        });
+
+        $("#afterBtn").click(function () {//Add elements to given node 
+            $("#domDiv").after(pTag);
+            $(pTag).insertAfter("#domDiv");
+        });
+
+        $("#beforeBtn").click(function () {//Add elements to given node 
+            $("#domDiv").before(pTag);
+            $(pTag).insertBefore("#domDiv");
+        });
+
+        $("#removeAll").click(function () {//Add elements to given node 
+            //$("p.sample").remove();
+            $("#domDiv").empty();
+        });
+    </script>
+</body>
+</html>

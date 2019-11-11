@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>First JavaScript page</title>
+</head>
+<body>
+    <h1>Working with JavaScript</h1>
+    <script>
+        //since window is the default object it can be omitted
+        window.document.writeln("Welcome To JavaScript");
+        document.write("</br> Another welcome");
+
+        //alternante way of writing content,preferred while debugging code
+        console.log("This line is written in the console window")
+
+        var myVar = 10;
+        console.log('this is a string');
+        console.log("this is a string's style,");
+        console.log("Variable myVar=", +myVar);
+
+        myVar = "Canarys1";
+        console.log("Variable myVar=" + myVar);
+
+        myVar = myVar + "Canarys";
+        console.log("Variable myVar=" + myVar);
+
+       //// window.alert("Welcome to JS");//Do Not use this,as it obstructs the user
+
+       ////var name=prompt ("Enter your name:")
+       // console.log("My Name is =" + name);
+
+       // var confirmed = confirm("Are you sure you want quit ?")
+       // console.log("Status =" + confirmed);
+
+        //var first = parseInt( prompt("Enter the first number"));
+        //var Second = parseInt( prompt("Enter the Second number"));
+       
+      //  var sum = first + Second;
+        //document.write("<h3> Sum is : " + sum + "</h3>");
+
+       
+        /*Conversion functions
+         * parseInt("String") returns a number
+         * parseFloat("string") returns a number
+         * var First=parseInt(prompt("Enter the first number"));
+         * */
+
+        //var first = parseInt(prompt("Enter the first number"));
+        //var Second = parseInt(prompt("Enter the Second number"));
+        //var Third = parseInt(prompt("Enter the third number"));
+
+        //if (first > Second && first > Third) {
+        //    console.log("First is greatest number" + first);
+        //}
+
+        //else if (Second > first && Second > Third) {
+        //    console.log("Second is greatest number" +Second);
+        //}
+
+        //else if (Third > Second && Third > first) {
+        //    console.log("Third is greatest number" + Third);
+        //}
+       // if (arr === undefined) /*  if arr===undefined */ {
+       //     console.log("arr is defined")
+       // }
+       // else {
+       //     console.log("arr is undefined")
+       // }
+
+       // console.log(arr);
+       // /* if(Arr===undefines){ console.log("undefined")}
+       //  * else {console.log("defined")}*/
+
+       // var arr = new Array(10);
+       // for (var i = 0; i < arr.length; i++) {
+       //     arr[i] = i;
+       // }
+       //// document.write("ul");
+       // arr[24] = 999;
+       // arr[11] = [1, 2, 3, 4, 5];
+
+       // for (var i = 0; i < arr.length; i++) {
+
+       //     //ES6 -template strings are created using backquote ` char
+       //     document.write(`<li> Index:${i},value:${arr[i]}</li>`);
+       //     document.write("<li>Index:" + i + ",value:" + arr[i] + "</li>");
+       // }
+       // document.write("/ul");
+
+
+        /*Built in Functions -> Datetime,string ,math,w3Schools, tutorialpoint*/
+
+        //var str = "Welcome";
+        //var today = new Date();
+        //console.log(today.toLocaleDateString);
+
+        //Functions
+
+        //function functionName([argList]) { }
+        function MyFunc(a) {
+            var today = new Date(2019, 1, 1);//Month from 0,11,
+            Today = new Date(2019, 11, 11)
+          //  console.log("Inside function:" + Today);
+           // console.log("From MyFunc");
+            return 10;
+        }
+        MyFunc();
+        MyFunc(10);//ARGUMENTS ARE HELD IN THE ARGUMENT ARRAYS
+       // console.log("After call :" + Today);
+       // console.log(window);
+
+        var fn = function (a, b) {
+            console.log(a,b);
+        }
+        fn(10, 10);
+        console.log(MyFunc);
+        console.log(fn);
+
+
+        //Immidiately Invoked Function Expressions(IIFE)(Defined only once-SINGLE USAGE FUNCTIONS)
+        (function (a, b) { console.log(a, b); })(99, 100);
+
+        //Objects
+        var obj = new Object();
+        obj.x = 10;
+        obj.y = 20;
+       //console.log(obj.x + obj.y);
+       // console.log(obj["x"] + obj["y"]);
+
+
+        var obj2 = { x: 10, y: 20 };
+       // console.log(obj2.x + " + " + obj2.y);
+        obj2.z = 999;
+
+        //Custom Types
+        //Constructor functions
+
+        function Name(firstname, lastname) {
+            this.firstname = firstname;
+            this.lastname = lastname;
+        }
+        var str = new String("Welcome");
+        var n = new Name("canarys", "Automation");
+       console.log(`First Name: ${n.firstname}, Lastname: ${n.lastname}`);
+        console.log(n);
+        console.log(n, str);
+
+        //For Custom types, the methods are added to the prototype object
+
+        Name.prototype = {
+            getFirstName: function () { return this.firstname; },
+            setFirstName: function (value) { this.firstname = value; },
+            getFullName: function () { return this.firstname + " " + this.lastname; }
+        }
+        var nameobj = new Name("first name", "lastname");
+
+        console.log(nameobj.getFullName());
+        console.log(nameobj);
+    </script>
+    
+</body>
+</html>

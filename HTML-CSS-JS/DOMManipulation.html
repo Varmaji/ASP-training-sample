@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DOM Manipulation</title>
+    <style>
+        .display {
+            background: linear-gradient(red,yellow,orange);
+            color: black;
+            font-weight: bold;
+            font-size: x-large;
+            border: 1px solid black;
+            padding: 5px;
+            min-height: 50px;
+            width: 100%;
+            display: block;
+        }
+
+        .button {
+            background: radial-gradient(yellow,orange);
+            color: black;
+            font-weight: bold;
+            border: 2px double black;
+            padding: 5px;
+        }
+
+            .button:hover {
+                background-color: gold;
+                color: black;
+                border: 2px solid red;
+            }
+
+
+        .no-display {
+            display: none;
+        }
+    </style>
+
+    <script>
+        function btnClick() {
+            var div = document.getElementById("div1");
+            console.log(div);
+            div.className = (div.className == "display" ? "no-display" : "display");
+            div.innerHTML = "The button has been clicked and you are seeing this text.";
+            div.style.padding = "25px";
+        }
+        //Addind the DropDown to the page
+        function addDropdown() {
+
+            var places = ["Bengaluru", "Mysuru", "Bellary", "Shivamogga", "Hubballi", "Bidar"];
+            var selectElement = document.createElement("select");
+            for (var i = 0; i < places.length; i++) {
+                var option = document.createElement("Option");
+                option.value = i;
+                option.text = places[i];
+                selectElement.appendChild(option);
+            }
+            var div = document.getElementById("div1");
+            div.appendChild(selectElement);
+        }
+        //UnObtrusive JavaScript
+        window.onload = function () {
+            addDropdown();
+            document.getElementById("btn1").addEventListener("click", this.btnClick1, false);
+        }
+
+        function btnClick1() {
+            alert("Say Hello from button");
+        }
+
+        //function firstNameCheck() {
+        //    return true;
+        //}
+
+        //function EmailCheck() {
+        //    return true;
+        //}
+
+        //function BirthDateCheck() {
+        //    return true;
+        //}
+
+
+
+        function onSubmit() {
+            birthDateCheck();
+            //1.Get the input element
+            //2.Check that the input element has value
+            //3.get the attributes of the input element
+            //4.get the span element
+            //5.display the span element and set the class to "show"
+            //6.display the error message in the span
+            //7.change the class for the input element to "error"
+
+            // FirstName Validation
+            var fName = $get("txtFirstName");
+            if (fName.value.length < 1) {
+                var spanId = fName.getAttribute("data-target");
+                var span = $get(spanId);
+                console.log(spanId);
+                span.className = "show";
+                var msg = fName.attributes["data-required"].value;
+                span.innerHTML = msg;
+                fName.className = "error";
+
+            } else {
+                $get(fName.getAttribute("data-target")).className = "no-display";
+                fName.className = "input";
+                var pattern = fName.attributes["data-validation-format"].value;
+                var regEx = new RegExp(pattern);
+                if (!regEx.test(fName.value)) {
+                    var span = $get(fName.getAttribute("data-target"));
+                    span.innerHTML = fName.attributes["data-validation-message"].value;
+                    span.className = "show";
+                    fName.className = "error";
+                }
+            }
+            //prevent the submit from happening.
+
+            //Email Validation
+            var Email = $get("txtEmail");
+            if (Email.value.length < 1) {
+                var spanId = Email.getAttribute("data-target");
+                var span = $get(spanId);
+                console.log(spanId);
+                span.className = "show";
+                var msg = Email.attributes["data-required"].value;
+                span.innerHTML = msg;
+                Email.className = "error";
+
+            } else {
+                $get(Email.getAttribute("data-target")).className = "no-display";
+                Email.className = "input";
+                var pattern = Email.attributes["data-validation-format"].value;
+                var regEx = new RegExp(pattern);
+                if (!regEx.test(Email.value)) {
+                    var span = $get(Email.getAttribute("data-target"));
+                    span.innerHTML = Email.attributes["data-validation-message"].value;
+                    span.className = "show";
+                    Email.className = "error";
+                }
+            }
+
+            function isLeapYear(yyyy) {
+                return (yyyy % 100 == 0) ? (yyyy % 400 == 0) : (yyyy % 4 == 0)
+            }
+
+            function birthDateCheck() {
+                
+                try {
+                    var dd = parseInt($get("txtDD").value);
+                    var mm = parseInt($get("txtMM").value);
+                    var yy = parseInt($get("txtYY").value);
+
+                    var maxDays = 31;
+                    if (mm == 2 && isLeapYear(yy))
+                        maxDays = 29;
+                    else if (mm == 2)
+                        maxDays = 28;
+                    else if (mm == 4 || mm == 6 || mm == 9 || mm == 11)
+                        maxDays = 30;
+
+                    if ((yy > 1950 && yy < 2020) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= maxDays))
+                        $get("dateSpan").className = "no-display";
+                    else
+                        $get("dateSpan").className = "show";
+                    return true;
+                }
+
+                
+                catch (e) {
+                    $get("dateSpan").className = "show";
+                }
+                return false;
+
+            }
+            return false;//prevent the submit from happening.
+        }
+
+        function $get(elementId) {
+            return document.getElementById(elementId);
+        }
+
+        window.onload = function () {
+            document.getElementById("btnSubmit").addEventListener("click", this.onSubmit, false);
+        }
+    </script>
+</head>
+<body>
+    <h2>DOM Manipulation</h2>
+    <div class="display" id="div1">This is a div tag.To hide this ,click on the button below.<br></div>
+    <button class="button" id="btn1" onclick="btnClick()">Hide the Div</button>
+
+
+    <style>
+        #formDiv {
+            margin: 5px;
+            padding: 5px;
+            border: 2px solid black;
+            box-shadow: gray 5px 5px 2px;
+            width: 50%;
+        }
+
+        .input {
+            border: 1px solid gray;
+            padding: 2px;
+        }
+
+        .error {
+            border: 1px solid red;
+            padding: 2px;
+        }
+
+        .show {
+            display: inline;
+            color: red;
+        }
+    </style>
+    <div id="formDiv">
+        <form>
+            <table>
+                <tr>
+                    <td>FirstName</td>
+                    <td>
+                        <input type="text" id="txtFirstName" name="txtFirstName"
+                               data-target="firstNameSpan"
+                               data-required="First Name is required"
+                               data-validation-format="^[A-Za-z ]+$"
+                               data-validation-message="Name should contain letters or spaces only"
+                               placeholder="Ente first Name"
+                               class="input" />
+                        <span id="firstNameSpan" class="no-display">*</span>
+                    </td>
+
+                    <td>EmailId</td>
+                    <td>
+                        <input type="text" id="txtEmail" name="txtEmail"
+                               data-target="EmailSpan"
+                               data-required="Email is required"
+                               data-validation-format="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ;
+                               data-validation-message="Email should contain @ and . symbol"
+                               placeholder="Enter Email Id"
+                               class="input" />
+                        <span id="EmailSpan" class="no-display">*</span>
+                    </td>
+
+                    <td>BirthDate</td>
+                    <td>
+                        <input type="text" name="txtDD" id="txtDD" size="1" placeholder="DD" />
+                        <span   style="color:red">*</span>
+                        <input type="text" name="txtMM" id="txtMM" size="1" placeholder="MM" />
+                        <span  style="color:red">*</span>
+                        <input type="text" name="txtYY" id="txtYY" size="2" placeholder="YY" />
+                        <span   style="color:red">*</span>
+                        <span id="dateSpan" class="no-display">Invalid Date</span>
+                       
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td><button type="button" id="btnSubmit">Submit</button></td>
+
+                </tr>
+            </table>
+
+        </form>
+
+
+    </div>
+</body>
+</html>
+
+
+
